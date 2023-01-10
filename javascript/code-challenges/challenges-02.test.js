@@ -65,10 +65,8 @@ const forLoopTwoToThe = (arr) => {
     let num = Math.pow(2, arr[i]);
     newArr.push(num);
   }
-  console.log(newArr);
   return newArr;
 };
-// let newArr = arr.map(int => Math.pow(2, int));
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -80,7 +78,13 @@ expect(forEachTwoToThe([0, 4, 5])).toStrictEqual([1, 16, 32]);
 
 const forEachTwoToThe = (arr) => {
   // Solution code here...
+  let newArr = [];
 
+  arr.forEach(int => {
+    let num = Math.pow(2, int);
+    newArr.push(num);
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -91,6 +95,8 @@ Write a function named mapTwoToThe that produces the same output as your forLoop
 
 const mapTwoToThe = (arr) => {
   // Solution code here...
+  let newArr = arr.map(int => Math.pow(2, int));
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
