@@ -59,18 +59,28 @@ For example, twoToThe([1,2,3]) returns [2,4,8] because 2 ^ 1 = 2, 2 ^ 2 = 4, and
 
 const forLoopTwoToThe = (arr) => {
   // Solution code here...
-  let newArr = arr.map(int => Math.pow(2, int));
+  let newArr = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    let num = Math.pow(2, arr[i]);
+    newArr.push(num);
+  }
+  console.log(newArr);
   return newArr;
 };
+// let newArr = arr.map(int => Math.pow(2, int));
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 
 Write a function named forEachTwoToThe that produces the same output as your forLoopTwoToThe function from challenge 4, but uses forEach instead of a for loop.
+
+expect(forEachTwoToThe([0, 4, 5])).toStrictEqual([1, 16, 32]);
 ------------------------------------------------------------------------------------------------ */
 
 const forEachTwoToThe = (arr) => {
   // Solution code here...
+
 };
 
 /* ------------------------------------------------------------------------------------------------
