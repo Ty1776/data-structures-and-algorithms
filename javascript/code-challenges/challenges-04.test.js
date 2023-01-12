@@ -96,12 +96,9 @@ HINT: Do it with a custom sort callback, not with using `.reverse()`. ;)
 
 const sortBackwards = (arr) => {
   // Solution code here...
-  let reverseSort = 
-
-  arr.sort((a, b) => {
-    a-b;
-  });
-  console.log(arr);
+  arr.sort((a, b) =>
+    b-a
+  );
   return arr;
 };
 
