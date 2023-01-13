@@ -1,5 +1,7 @@
 'use strict';
 
+const { val } = require("cheerio/lib/api/attributes");
+
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 1 - Review
 
@@ -83,7 +85,7 @@ test('It should return the length of the array', () => {
 
 const countNumberOfElements = (arr) => {
   // Solution code here...
-  let count = arr.reduce((accumulator, value) => ( accumulator === 0 ? value + 1 : value), 0);
+  let count = arr.reduce((accumulator, value) => (accumulator === 0 ? value + 1 : value), 0);
   return count;
 };
 
@@ -91,6 +93,10 @@ const countNumberOfElements = (arr) => {
 CHALLENGE 5
 
 Write a function named returnNames that, given the Star Wars data, below, uses reduce to return an array containing the names of the characters.
+
+ test('It should return an array continaing the names of the characters', () => {
+    expect(returnNames(starWarsData)).toStrictEqual([ 'Luke Skywalker', 'C-3PO', 'R2-D2', 'Darth Vader', 'Leia Organa' ]);
+    expect(returnNames(starWarsData).length).toStrictEqual(5);
 ------------------------------------------------------------------------------------------------ */
 
 let starWarsData = [{
@@ -111,7 +117,8 @@ let starWarsData = [{
   skin_color: 'gold',
   eye_color: 'yellow',
   birth_year: '112BBY',
-  gender: 'n/a'},
+  gender: 'n/a'
+},
 {
   name: 'R2-D2',
   height: '96',
@@ -145,6 +152,10 @@ let starWarsData = [{
 
 const returnNames = (arr) => {
   // Solution code here...
+  return arr.reduce((accumulator, value) => {
+    accumulator.push(value.name);
+    return accumulator;
+  }, []);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -153,10 +164,19 @@ CHALLENGE 6
 Write a function named reversedString that takes in a string and returns a string with the letters in reverse order.
 
 Note: You must use reduce for this challenge. You may not use the built-in .reverse() string method.
+
+test('It should return the string with the characters in reverse order', () => {
+    expect(reversedString('Code 301')).toStrictEqual('103 edoC');
 ------------------------------------------------------------------------------------------------ */
 
 const reversedString = (str) => {
   // Solution code here...
+
+  let split = str.split('');
+  return split.reduce((accumulator, value) => {
+    accumulator = value + accumulator;
+    return accumulator;
+  }, '');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -331,7 +351,7 @@ describe('Testing challenge 2', () => {
 
 describe('Testing challenge 3', () => {
   test('It should add the purchase price', () => {
-    expect(addPurchases([{item: 'switch', purchasePrice: 399}, {item: 'toothpaste', purchasePrice: 2}])).toStrictEqual(401);
+    expect(addPurchases([{ item: 'switch', purchasePrice: 399 }, { item: 'toothpaste', purchasePrice: 2 }])).toStrictEqual(401);
     expect(addPurchases([])).toStrictEqual(0);
   });
 });
@@ -344,7 +364,7 @@ describe('Testing challenge 4', () => {
 
 describe('Testing challenge 5', () => {
   test('It should return an array continaing the names of the characters', () => {
-    expect(returnNames(starWarsData)).toStrictEqual([ 'Luke Skywalker', 'C-3PO', 'R2-D2', 'Darth Vader', 'Leia Organa' ]);
+    expect(returnNames(starWarsData)).toStrictEqual(['Luke Skywalker', 'C-3PO', 'R2-D2', 'Darth Vader', 'Leia Organa']);
     expect(returnNames(starWarsData).length).toStrictEqual(5);
   });
 });
@@ -363,7 +383,7 @@ xdescribe('Testing challenge 7', () => {
 
 xdescribe('Testing challenge 8', () => {
   test('It should return the average of the numbers in the array', () => {
-    expect(calculateAverage([18, 290, 37, 4, 55, 16, 7, 85 ])).toStrictEqual(64);
+    expect(calculateAverage([18, 290, 37, 4, 55, 16, 7, 85])).toStrictEqual(64);
   });
 });
 
@@ -375,13 +395,13 @@ xdescribe('Testing challenge 9', () => {
 
 xdescribe('Testing challenge 10', () => {
   test('It should return an object that contains the names of each stat as individual keys and the respective baseStats as values to those keys.', () => {
-    expect(extractStats(snorlaxData)).toStrictEqual({'speed': 30, 'special-defense': 110, 'special-attack': 65});
+    expect(extractStats(snorlaxData)).toStrictEqual({ 'speed': 30, 'special-defense': 110, 'special-attack': 65 });
   });
 });
 
 xdescribe('Testing challenge 11', () => {
   test('It should return an array containing the names of the children', () => {
-    expect(extractChildren(characters)).toStrictEqual([ 'Robb', 'Sansa', 'Arya', 'Bran', 'Rickon', 'Drogon', 'Rhaegal', 'Viserion', 'Margaery', 'Loras' ]);
+    expect(extractChildren(characters)).toStrictEqual(['Robb', 'Sansa', 'Arya', 'Bran', 'Rickon', 'Drogon', 'Rhaegal', 'Viserion', 'Margaery', 'Loras']);
     expect(extractChildren(characters).length).toStrictEqual(10);
   });
 });
