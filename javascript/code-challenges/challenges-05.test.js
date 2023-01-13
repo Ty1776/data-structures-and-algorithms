@@ -28,10 +28,21 @@ CHALLENGE 2
 
 Write a function named addValues that, given an array of numbers as input, uses reduce to add the values in the array.
 
+ test('It should add the values of an array', () => {
+    expect(addValues([1, 2, 3, 4, 5])).toStrictEqual(15);
+    expect(addValues([])).toStrictEqual(0);
+    expect(addValues([1, 2, 3, 4, -5])).toStrictEqual(5);
+
 ------------------------------------------------------------------------------------------------ */
 
 const addValues = (arr) => {
   // Solution code here...
+
+  let sum = arr.reduce((accumulator, value) => {
+    accumulator = accumulator + value;
+    return accumulator;
+  }, 0);
+  return sum;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -44,10 +55,19 @@ Write a function named addPurchases that, given an array of objects as input, us
   purchasePrice: 399
 }
 
+
+ test('It should add the purchase price', () => {
+    expect(addPurchases([{item: 'switch', purchasePrice: 399}, {item: 'toothpaste', purchasePrice: 2}])).toStrictEqual(401);
+    expect(addPurchases([])).toStrictEqual(0);
 ------------------------------------------------------------------------------------------------ */
 
 const addPurchases = (arr) => {
   // Solution code here...
+  let total = arr.reduce((accumulator, value) => {
+    accumulator = accumulator + value.purchasePrice;
+    return accumulator;
+  }, 0);
+  return total;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -56,10 +76,15 @@ CHALLENGE 4
 Write a function named countNumberOfElements that, given an array as input, uses reduce to count the number of elements in the array.
 
 Note: You may not use the array's built-in length property.
+
+test('It should return the length of the array', () => {
+    expect(countNumberOfElements([1, 2, 3, 4, 5])).toStrictEqual(5);
 ------------------------------------------------------------------------------------------------ */
 
 const countNumberOfElements = (arr) => {
   // Solution code here...
+  let count = arr.reduce((accumulator, value) => ( accumulator === 0 ? value + 1 : value), 0);
+  return count;
 };
 
 /* ------------------------------------------------------------------------------------------------
