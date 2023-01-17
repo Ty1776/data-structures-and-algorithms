@@ -75,13 +75,23 @@ Your function should use slice within a loop and return an array of each success
 
 For example, if the input is 'Welcome', the output will be:
 ['Welcome', 'elcome', 'lcome', 'come', 'ome', 'me', 'e', ''].
+
+test('It should return a list of shortening words', () => {
+    expect(howMuchPencil('Welcome')).toStrictEqual(['Welcome', 'elcome', 'lcome', 'come', 'ome', 'me', 'e', '']);
+    expect(howMuchPencil('Welcome').length).toStrictEqual(8);
+    expect(howMuchPencil('')).toStrictEqual(['']);
+    expect(howMuchPencil('abc')).toStrictEqual(['abc', 'bc', 'c', '']);
 ------------------------------------------------------------------------------------------------ */
 
 const howMuchPencil = (str) => {
   let result = [];
   // Solution code here...
+  for(let i = 0; i < str.length+1; i++) {
+    result.push(str.slice(i));
+  }
   return result;
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -89,10 +99,17 @@ CHALLENGE 5
 Write a function name wordsToCharList that, given a string as input, returns a new array where every element is a character of the input string.
 
 For example, wordsToCharList('gregor') returns ['g','r','e','g','o','r'].
+
+ test('It should return an array of individual letters', () => {
+    expect(wordsToCharList('Gregor')).toStrictEqual(['G', 'r', 'e', 'g', 'o', 'r']);
+    expect(wordsToCharList('Gregor').length).toStrictEqual(6);
+    expect(wordsToCharList('hooray')).toStrictEqual(['h', 'o', 'o', 'r', 'a', 'y']);
+    expect(wordsToCharList('')).toStrictEqual([]);
 ------------------------------------------------------------------------------------------------ */
 
 const wordsToCharList = (arr) => {
   // Solution code here...
+  return arr.split('');
 };
 
 
@@ -106,6 +123,10 @@ Write a function named listFoods that takes in the recipe and returns a new arra
 Use slice for this function, maybe more than once. The Array.indexOf() method may also be helpful.
 
 Do not use split for this function.
+
+test('It should return a list of foods', () => {
+    expect(listFoods(gruffaloCrumble)).toStrictEqual(['Gruffalo', 'oats', 'brown sugar', 'flour', 'pure maple syrup', 'chopped nuts', 'baking soda', 'baking powder', 'cinnamon', 'melted butter', 'fresh water']);
+    expect(listFoods(gruffaloCrumble).length).toStrictEqual(11);
 ------------------------------------------------------------------------------------------------ */
 
 const gruffaloCrumble = {
@@ -140,6 +161,15 @@ const gruffaloCrumble = {
 const listFoods = (recipe) => {
   let result = [];
   // Solution code here...
+  let foods = recipe.ingredients;
+  for(let i = 0; i < foods.length; i++) {
+    let listSpace = foods[i].indexOf(' ');
+    let withoutQty = foods[i].slice(listSpace+1);
+    listSpace = withoutQty.indexOf(' ');
+    let withoutUnit = withoutQty.slice(listSpace+1);
+    result.push(withoutUnit);
+  }
+
   return result;
 };
 
