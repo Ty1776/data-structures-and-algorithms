@@ -51,8 +51,12 @@ CHALLENGE 3
 
 Write a function named checkValues that takes in an object and a value and returns true if the value is in the object.
 
-test('It should return true if the value is in the object', () => {
+ test('It should return true if the value is in the object', () => {
     expect(checkValues({ class: '301' }, '301')).toBe(true);
+  });
+
+  test('It should return false if the value is not in the object', () => {
+    expect(checkValues({ class: '301' }, '401')).toBe(false);
 ------------------------------------------------------------------------------------------------ */
 
 const checkValues = (obj, value) => {
@@ -77,10 +81,20 @@ HR has asked you to change the data to make it easier to print so that it looks 
   'Alan Turing: 222-853-5933'
 ]
 
+test('It should return an an array of names and numbers', () => {
+    const startingObj = {
+      'Grace Hopper': '222-303-5938',
+      'Ada Lovelace': '222-349-9842',
+      'Alan Turing': '222-853-5933'
+    };
+
+    expect(updateNumbers(startingObj).includes('Grace Hopper: 222-303-5938')).toBe(true);
+
 ------------------------------------------------------------------------------------------------ */
 
 const updateNumbers = (obj) => {
   // Solution code here...
+  return Object.entries(obj).map(([name, number]) => `${name}: ${number}`);
 };
 
 
@@ -89,6 +103,10 @@ const updateNumbers = (obj) => {
 CHALLENGE 5
 
 Write a function named getHouses that returns a new array containing the names of all of the houses in the data set.
+
+test('It should return an array of the names of the houses', () => {
+    expect(getHouses(characters)[0]).toStrictEqual('Stark');
+    expect(getHouses(characters).length).toStrictEqual(7);
 ------------------------------------------------------------------------------------------------ */
 
 const characters = [
@@ -135,10 +153,11 @@ const characters = [
 ];
 
 const getHouses = (arr) => {
-  let houses = [];
   // Solution code here...
+  let houses = Object.values(arr).map(name => name.house);
   return houses;
 };
+
 
 /*------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -150,11 +169,30 @@ This function should take in an array of data and a character name and return a 
 For example:
 hasChildrenValues(characters, 'Cersei') will return true
 hasChildrenValues(characters, 'Sansa') will return false
+
+test('It should return true for characters that have children', () => {
+    expect(hasChildrenValues(characters, 'Daenarys')).toBeTruthy();
+  });
+
+  test('It should return false to characters who do not have children', () => {
+    expect(hasChildrenValues(characters, 'Sansa')).toBeFalsy();
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenValues = (arr, character) => {
+  let hasChildren = false;
   // Solution code here...
-
+  arr.forEach((person) => {
+    if (person.name === character) {
+      Object.keys(person).forEach((key, i) => {
+        if (key === 'children') {
+          if (Object.values(person)[i].length) {
+            hasChildren = true;
+          }
+        }
+      });
+    }
+  });
+  return hasChildren;
 };
 
 /* ------------------------------------------------------------------------------------------------
